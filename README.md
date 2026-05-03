@@ -183,11 +183,6 @@ For the GitHub portfolio version, this project works best as a local/full-stack 
 
 ---
 
-Built with ❤️ by Jacob
-
-
----
-
 ## Latest Polish Pass
 Recent UI and product improvements include:
 - Edit trip workflow now opens in its own modal instead of reusing the add-trip form
