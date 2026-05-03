@@ -6,6 +6,13 @@ This project was redesigned from a basic travel/weather app into a more practica
 
 ---
 
+## Live Demo
+
+- [**Frontend Website URL**](https://travel-logger-client.vercel.app/)
+- [**Backend Health Check**](https://travel-logger-api.onrender.com/api/health)
+
+---
+
 ## Features
 Recent additions are in **bold**
 - Add, edit, view, and delete travel entries
@@ -65,6 +72,7 @@ travel-logger/
 │   ├── .env.example
 │   ├── package.json
 │   └── tsconfig.json
+├── DEPLOYMENT.md
 ├── package.json
 ├── .gitignore
 └── README.md
@@ -125,6 +133,8 @@ NODE_ENV="development"
 VITE_API_URL="https://your-render-api-url.onrender.com/api"
 ```
 
+Never commit real `.env` values or database connection strings.
+
 ---
 
 ## Deployment
@@ -137,12 +147,7 @@ Backend API: Render
 Database: Neon PostgreSQL
 ```
 
-Production setup:
-- Neon stores the PostgreSQL database
-- Render hosts the Express API and runs Prisma migrations
-- Vercel hosts the React/Vite frontend
-- Vercel uses `VITE_API_URL` to connect to the Render API
-- Render uses `CLIENT_URL` to allow requests from the deployed Vercel frontend
+See `DEPLOYMENT.md` for more information on deployment.
 
 ---
 
@@ -180,25 +185,6 @@ status=completed | planned | wishlist | all
 search=keyword
 tag=keyword
 sort=newest | oldest
-```
-
----
-
-## Database
-This project uses PostgreSQL through Prisma.
-
-The Prisma model stores:
-- Trip details
-- Dates and status
-- Rating
-- Notes and memories
-- Photo URL
-- Tags
-- Created/updated timestamps
-
-To open Prisma Studio:
-```bash
-npm run db:studio
 ```
 
 ---
