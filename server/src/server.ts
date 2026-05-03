@@ -1,6 +1,6 @@
 import 'dotenv/config';
-import cors from 'cors';
-import express from 'express';
+import express, { Request, Response } from "express";
+import cors from "cors";
 import tripsRouter from './routes/trips.js';
 import { prisma } from './lib/prisma.js';
 
@@ -11,7 +11,7 @@ const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
 app.use(cors({ origin: clientUrl }));
 app.use(express.json());
 
-app.get('/api/health', async (_req, res) => {
+app.get('/api/health', async (_req: Request, res: Response) => {
   try {
     await prisma.$queryRaw`SELECT 1`;
     res.json({ status: 'ok', database: 'connected' });
@@ -22,7 +22,7 @@ app.get('/api/health', async (_req, res) => {
 
 app.use('/api/trips', tripsRouter);
 
-app.use((_req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: 'Route not found.' });
 });
 

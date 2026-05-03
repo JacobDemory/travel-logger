@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { type Request, type Response, Router } from 'express';
 import { prisma } from '../lib/prisma.js';
 import { getWeatherSnapshot } from '../lib/weather.js';
 
@@ -95,7 +95,7 @@ function validateTripInput(body: TripInput, isUpdate = false) {
   };
 }
 
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const { status, search, tag, sort = 'newest' } = req.query;
 
@@ -131,7 +131,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/stats', async (_req, res) => {
+router.get('/stats', async (_req: Request, res: Response) => {
   try {
     const trips = await prisma.trip.findMany({ orderBy: { startDate: 'desc' } });
     const completed = trips.filter((trip) => trip.status === 'completed');
@@ -155,7 +155,7 @@ router.get('/stats', async (_req, res) => {
 });
 
 
-router.get('/weather', async (req, res) => {
+router.get('/weather', async (req: Request, res: Response) => {
   const location = typeof req.query.location === 'string' ? req.query.location.trim() : '';
   const date = typeof req.query.date === 'string' ? req.query.date.trim() : undefined;
 
@@ -172,7 +172,7 @@ router.get('/weather', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
@@ -188,7 +188,7 @@ router.get('/:id', async (req, res) => {
   return res.json(trip);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req: Request, res: Response) => {
   const { errors, data } = validateTripInput(req.body);
 
   if (errors.length > 0) {
@@ -222,7 +222,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
@@ -248,7 +248,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
   if (!Number.isInteger(id)) {
