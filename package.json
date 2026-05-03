@@ -1,20 +1,15 @@
 {
-  "name": "travel-log",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "travel-logger",
+  "version": "3.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "axios": "^1.13.2",
-    "body-parser": "^2.2.1",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "mongoose": "^8.20.3"
+    "dev": "npm run dev --workspace server & npm run dev --workspace client",
+    "build": "npm run build --workspace server && npm run build --workspace client",
+    "db:migrate": "npm run db:migrate --workspace server",
+    "db:studio": "npm run db:studio --workspace server"
   }
 }
