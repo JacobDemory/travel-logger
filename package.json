@@ -11,5 +11,10 @@
     "build": "npm run build --workspace server && npm run build --workspace client",
     "db:migrate": "npm run db:migrate --workspace server",
     "db:studio": "npm run db:studio --workspace server"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0"
   }
 }
