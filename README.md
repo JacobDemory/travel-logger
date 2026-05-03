@@ -1,8 +1,8 @@
 # Travel Logger
 
-A full-stack travel journal for logging past trips, organizing memories, tracking destinations, and planning future travel. Add completed trips, upcoming plans, and wishlist locations with notes, highlights, ratings, tags, and photo links.
+A full-stack travel journal for logging past trips, organizing memories, tracking destinations, and planning future travel. Add completed trips, upcoming plans, and wishlist locations with notes, highlights, ratings, tags, photos, and context-aware weather.
 
-This project was redesigned from a basic travel/weather app into a more practical TypeScript travel journal. Instead of showing current weather for old trips, it focuses on memories, planning, trip details, and searchable travel history. Weather is now context-aware: completed trips use a written weather memory, while planned trips within the next 10 days can display a live weather snapshot.
+This project was redesigned from a basic travel/weather app into a more practical TypeScript travel journal. Instead of showing current weather for old trips, it focuses on memories, planning, trip details, and searchable travel history. Weather is context-aware: completed trips use a written weather memory, while planned trips within the next 10 days can display a live weather snapshot.
 
 ---
 
@@ -11,15 +11,17 @@ Recent additions are in **bold**
 - Add, edit, view, and delete travel entries
 - Track trips by **completed**, **planned**, or **wishlist** status
 - Store trip title, location, country, start/end dates, travel type, rating, notes, highlights, favorite memory, weather memory, photo URL, and tags
-- **Dashboard showing total trips, completed trips, planned trips, wishlist destinations, most recent trip, and favorite/highest-rated trip**
-- **Search trips by title, location, notes, highlights, and memories**
-- **Filter trips by status and tags**
-- **Detailed trip modal for viewing memories, highlights, notes, ratings, and photos**
-- **SQLite database with Prisma migrations for local SQL storage**
+- Dashboard showing total trips, completed trips, planned trips, wishlist destinations, most recent trip, and favorite/highest-rated trip
+- Search trips by title, location, notes, highlights, and memories
+- Filter trips by status and tags
+- Detailed trip modal for viewing memories, highlights, notes, ratings, and photos
 - **React + TypeScript frontend with a responsive travel-themed UI**
 - **Express + TypeScript backend with REST API routes**
+- **PostgreSQL database using Neon and Prisma migrations**
+- **Frontend deployed on Vercel**
+- **Backend API deployed on Render**
 - **Current weather snapshots for planned trips within the next 10 days using Open-Meteo**
-- Collapsible add/edit form to reduce page crowding
+- Edit trip workflow opens in its own modal
 - Input validation for required fields, dates, statuses, and ratings
 
 ---
@@ -31,7 +33,10 @@ Recent additions are in **bold**
 - Node.js
 - Express
 - Prisma
-- SQLite
+- PostgreSQL
+- Neon
+- Render
+- Vercel
 - CSS
 
 ---
@@ -67,10 +72,14 @@ travel-logger/
 
 ---
 
-## How to Run
+## How to Run Locally
 1. **Prerequisites**: Ensure you have Node.js installed.
-2. **Download**: Clone or download this repository to your local machine.
-3. **Install dependencies** from the root folder:
+2. **Clone the repository**:
+   ```bash
+   git clone https://github.com/JacobDemory/travel-logger.git
+   cd travel-logger
+   ```
+3. **Install dependencies**:
    ```bash
    npm install
    ```
@@ -78,11 +87,12 @@ travel-logger/
    ```bash
    cp server/.env.example server/.env
    ```
-5. **Initialize the SQLite database**:
+5. **Add your database URLs** to `server/.env`.
+6. **Run Prisma migrations**:
    ```bash
    npm run db:migrate
    ```
-6. **Run the full app**:
+7. **Run the full app**:
    ```bash
    npm run dev
    ```
@@ -96,6 +106,43 @@ The backend API runs at:
 ```txt
 http://localhost:5001/api
 ```
+
+---
+
+## Environment Variables
+
+### Server: `server/.env`
+```env
+DATABASE_URL="your_neon_pooled_connection_string"
+DIRECT_URL="your_neon_direct_connection_string"
+PORT=5001
+CLIENT_URL="http://localhost:5173"
+NODE_ENV="development"
+```
+
+### Vercel frontend variable
+```env
+VITE_API_URL="https://your-render-api-url.onrender.com/api"
+```
+
+---
+
+## Deployment
+
+This project is deployed with:
+
+```txt
+Frontend: Vercel
+Backend API: Render
+Database: Neon PostgreSQL
+```
+
+Production setup:
+- Neon stores the PostgreSQL database
+- Render hosts the Express API and runs Prisma migrations
+- Vercel hosts the React/Vite frontend
+- Vercel uses `VITE_API_URL` to connect to the Render API
+- Render uses `CLIENT_URL` to allow requests from the deployed Vercel frontend
 
 ---
 
@@ -120,7 +167,7 @@ Weather Memory: Warm, sunny, and perfect beach weather
 GET    /api/health
 GET    /api/trips
 GET    /api/trips/stats
-GET    /api/trips/weather?location=City
+GET    /api/trips/weather?location=City&date=YYYY-MM-DD
 GET    /api/trips/:id
 POST   /api/trips
 PUT    /api/trips/:id
@@ -138,7 +185,7 @@ sort=newest | oldest
 ---
 
 ## Database
-This project uses SQLite through Prisma, so no external database account is required.
+This project uses PostgreSQL through Prisma.
 
 The Prisma model stores:
 - Trip details
@@ -156,21 +203,7 @@ npm run db:studio
 
 ---
 
-## Deployment Notes
-The easiest deployment path is:
-- Frontend: Vercel
-- Backend: Render
-- Database: SQLite locally for development, then upgrade to PostgreSQL/Neon or Render PostgreSQL for production
-
-For the GitHub portfolio version, this project works best as a local/full-stack demo with screenshots or a short demo video unless the backend is deployed.
-
----
-
 ## Future Improvements
-- Deploy frontend publicly using Vercel
-- Deploy backend API using Render
-- Add production environment configuration for deployed frontend/backend
-- Upgrade production database from SQLite to PostgreSQL
 - Add user authentication
 - Add map-based trip visualization
 - Upload local photos instead of using photo URLs
@@ -179,15 +212,6 @@ For the GitHub portfolio version, this project works best as a local/full-stack 
 - Add forecast details for upcoming trips
 - Add itinerary planning by day
 - Add export to CSV or PDF
-- Upgrade production database from SQLite to PostgreSQL
-
----
-
-## Latest Polish Pass
-Recent UI and product improvements include:
-- Edit trip workflow now opens in its own modal instead of reusing the add-trip form
-- Filters now use clear segmented controls for All, Completed, Planned, and Wishlist
-- Planned trips within the next 10 days request a forecast for the trip start date
-- Completed trips keep a written weather memory instead of pulling current weather
-- Geocoding was made more reliable by using the primary city/place name for weather lookups
-- Layout spacing, trip cards, dashboard sections, and modals were polished for a cleaner app feel
+- Add demo screenshots and a walkthrough video
+- Add GitHub Actions for automated build checks
+- Add a deployment status section or health-check badge
