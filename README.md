@@ -167,6 +167,10 @@ For the GitHub portfolio version, this project works best as a local/full-stack 
 ---
 
 ## Future Improvements
+- Deploy frontend publicly using Vercel
+- Deploy backend API using Render
+- Add production environment configuration for deployed frontend/backend
+- Upgrade production database from SQLite to PostgreSQL
 - Add user authentication
 - Add map-based trip visualization
 - Upload local photos instead of using photo URLs
