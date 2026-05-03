@@ -1,11 +1,11 @@
 -- CreateTable
 CREATE TABLE "Trip" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "location" TEXT NOT NULL,
     "country" TEXT,
-    "startDate" DATETIME NOT NULL,
-    "endDate" DATETIME,
+    "startDate" TIMESTAMP(3) NOT NULL,
+    "endDate" TIMESTAMP(3),
     "status" TEXT NOT NULL DEFAULT 'completed',
     "travelType" TEXT,
     "rating" INTEGER,
@@ -15,6 +15,8 @@ CREATE TABLE "Trip" (
     "weatherMemory" TEXT,
     "photoUrl" TEXT,
     "tags" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Trip_pkey" PRIMARY KEY ("id")
 );
