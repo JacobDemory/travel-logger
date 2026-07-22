@@ -14,7 +14,6 @@ This project was redesigned from a basic travel/weather app into a more practica
 ---
 
 ## Features
-Recent additions are in **bold**
 - Add, edit, view, and delete travel entries
 - Track trips by **completed**, **planned**, or **wishlist** status
 - Store trip title, location, country, start/end dates, travel type, rating, notes, highlights, favorite memory, weather memory, photo URL, and tags
