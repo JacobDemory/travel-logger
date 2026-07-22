@@ -199,5 +199,7 @@ sort=newest | oldest
 - Add itinerary planning by day
 - Add export to CSV or PDF
 - Add demo screenshots and a walkthrough video
-- Add GitHub Actions for automated build checks
 - Add a deployment status section or health-check badge
+
+Automated dependency auditing and production builds run through GitHub Actions
+on pushes and pull requests.

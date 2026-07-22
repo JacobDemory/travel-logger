@@ -6,6 +6,7 @@ dist/
 build/
 client/dist/
 server/dist/
+*.tsbuildinfo
 
 # Environment files
 .env
