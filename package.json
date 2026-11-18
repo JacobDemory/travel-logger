@@ -7,6 +7,10 @@
     "server"
   ],
   "scripts": {
+    "audit": "node scripts/audit.mjs",
+    "audit:raw": "npm audit --audit-level=high",
+    "audit:production": "npm audit --omit=dev --audit-level=high",
+    "test:security": "node --test scripts/audit.test.mjs",
     "dev": "npm run dev --workspace server & npm run dev --workspace client",
     "build": "npm run build --workspace server && npm run build --workspace client",
     "db:migrate": "npm run db:migrate --workspace server",

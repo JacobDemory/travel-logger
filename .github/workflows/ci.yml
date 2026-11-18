@@ -29,5 +29,8 @@ jobs:
       - name: Build client and server
         run: npm run build
 
+      - name: Test security policy
+        run: npm run test:security
+
       - name: Audit dependencies
-        run: npm audit --audit-level=high
+        run: npm run audit
