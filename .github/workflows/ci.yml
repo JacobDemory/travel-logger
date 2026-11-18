@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "31 9 * * 1"
 
 permissions:
   contents: read
@@ -24,8 +26,8 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=high
-
       - name: Build client and server
         run: npm run build
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
